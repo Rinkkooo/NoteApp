@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.onboard.OnBoardFragment"
+    android:background="@color/black">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/tv_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Пропустить"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="#D88B02"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="19dp"/>
+
+    <TextView
+        android:id="@+id/tv_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#8E8B8B"
+        android:text="Начать работу "
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="477dp"
+        android:layout_marginStart="119dp"
+        android:layout_marginEnd="111dp"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/dots_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="547dp"
+        android:background="@color/black"
+        app:tabBackground="@drawable/tab_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        />
+
+
+
+</FrameLayout>
