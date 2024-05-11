@@ -54,10 +54,6 @@ class OnBoardFragment : Fragment() {
                 setCurrentItem(currentItem + 1, true)
             }
         }
-
-        binding.tvStart.setOnClickListener{
-            TODO()
-        }
     }
 
 }
