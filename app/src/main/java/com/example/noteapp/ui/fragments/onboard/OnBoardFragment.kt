@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentOnBoardBinding
 import com.example.noteapp.ui.adapter.OnBoardViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -53,6 +55,9 @@ class OnBoardFragment : Fragment() {
             if (currentItem < 3) {
                 setCurrentItem(currentItem + 1, true)
             }
+        }
+        binding.tvStart.setOnClickListener{
+            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
         }
     }
 
