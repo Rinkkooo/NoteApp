@@ -19,7 +19,7 @@ class DetailNoteFragment : Fragment() {
 
     private lateinit var binding: FragmentNoteDetailBinding
     private var currentColor: Int = Color.BLACK
-
+    private var noteId: Int = -1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,9 +30,23 @@ class DetailNoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        update()
         setupListener()
         getCurrentDateAndTime()
         setupRadioGroupListener()
+    }
+
+    private fun update() {
+        arguments?.let {
+            noteId = it.getInt("noteId", -1)
+        }
+        if (noteId != -1){
+            var args = App().getInstance()?.noteDao()?.getNoteById(noteId)
+            args?.let { model ->
+                binding.etDetailTitle.setText(model.title)
+                binding.etDetailDescription.setText(model.title)
+            }
+        }
     }
 
     private fun setupListener() {
@@ -48,6 +62,14 @@ class DetailNoteFragment : Fragment() {
                 putInt("selectedColor", currentColor)
             }
             findNavController().navigate(R.id.action_detailNoteFragment_to_noteFragment, bundle)
+
+            if (noteId != -1){
+                val updateNote = NoteModel(etTitle, etDescription, currentDate, currentTime, currentColor)
+                updateNote.id = noteId
+                App().getInstance()?.noteDao()?.updateNote(updateNote)
+            }else{
+                App().getInstance()?.noteDao()?.insertNote(NoteModel(etTitle, etDescription, currentDate, currentTime, currentColor))
+            }
         }
         binding.backBtn.setOnClickListener {
             findNavController().navigateUp()
