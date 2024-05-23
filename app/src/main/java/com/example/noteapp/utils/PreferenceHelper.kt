@@ -4,13 +4,14 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class PreferenceHelper {
-    private lateinit var sharedPreference: SharedPreferences
 
-    fun unit(context: Context){
-        sharedPreference = context.getSharedPreferences("shared", Context.MODE_PRIVATE)
+    private lateinit var sharedPreferences: SharedPreferences
+
+    fun unit(context: Context) {
+        sharedPreferences = context.getSharedPreferences("shared", Context.MODE_PRIVATE)
     }
 
     var isOnBoardShow: Boolean
-        get() = sharedPreference.getBoolean("board", false)
-        set(value) = sharedPreference.edit().putBoolean("board", value).apply()
+        get() = sharedPreferences.getBoolean("board", false)
+        set(value) = sharedPreferences.edit().putBoolean("board", value).apply()
 }
