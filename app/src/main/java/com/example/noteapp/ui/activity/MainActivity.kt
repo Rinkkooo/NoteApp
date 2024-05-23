@@ -1,6 +1,7 @@
 package com.example.noteapp.ui.activity
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -26,12 +27,21 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        if (preferenceHelper.isOnBoardShow) {
+        if (!preferenceHelper.isOnBoardShow) {
             navController.navigate(R.id.onBoardFragment)
-            preferenceHelper.isOnBoardShow = true
-        }else{
+        } else {
             navController.navigate(R.id.noteFragment)
         }
-    }
 
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (navController.currentDestination?.id == R.id.noteFragment) {
+                    finish()
+                } else {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        })
+    }
 }
