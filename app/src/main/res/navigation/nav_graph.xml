@@ -36,5 +36,8 @@
         <action
             android:id="@+id/action_detailNoteFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <argument
+            android:name="noteId"
+            app:argType="integer"/>
     </fragment>
 </navigation>
