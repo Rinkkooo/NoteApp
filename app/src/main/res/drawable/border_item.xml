@@ -4,5 +4,5 @@
         android:width="2dp"
         android:color="#191818"/>
 
-    <corners android:radius="16dp"/> <!-- Corner radius for round effect -->
+    <corners android:radius="16dp"/>
 </shape>

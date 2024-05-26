@@ -27,12 +27,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        if (!preferenceHelper.isOnBoardShow) {
-            navController.navigate(R.id.onBoardFragment)
-        } else {
-            navController.navigate(R.id.noteFragment)
-        }
-
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (navController.currentDestination?.id == R.id.noteFragment) {
@@ -43,5 +37,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (!preferenceHelper.isOnBoardShow) {
+            navController.navigate(R.id.onBoardFragment)
+        }else if (!preferenceHelper.isSignUpShow) {
+            navController.navigate(R.id.signUpFragment)
+        }else{
+            navController.navigate(R.id.noteFragment)
+        }
     }
 }
