@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="black1">#191818</color>
+    <color name="black_bck">#191818</color>
+    <color name="text_color_light_gray">#B1B1B1</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="orange">#D88B02</color>
-    <color name="beige">#EBE4C9</color>
-    <color name="red">#571818</color>
-
+    <color name="orange_text_color">#D88B02</color>
+    <color name="beige_bck">#EBE4C9</color>
+    <color name="brown_text_color">#A1865E</color>
+    <color name="red_bck">#571818</color>
 
 </resources>

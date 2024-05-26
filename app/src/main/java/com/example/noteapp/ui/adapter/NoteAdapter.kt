@@ -1,5 +1,6 @@
 package com.example.noteapp.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -10,7 +11,6 @@ import com.example.noteapp.R
 import com.example.noteapp.data.models.NoteModel
 import com.example.noteapp.databinding.ItemNoteBinding
 import com.example.noteapp.interfaces.OnClickItem
-import java.util.Date
 
 
 class NoteAdapter(private val onLongClick: OnClickItem, private val onClick: OnClickItem) : ListAdapter<NoteModel, NoteAdapter.ViewHolder>(DiffCallback()) {
@@ -20,7 +20,11 @@ class NoteAdapter(private val onLongClick: OnClickItem, private val onClick: OnC
             tvItemDescription.text = item.description
             tvDate.text = item.date
             tvTime.text = item.time
-            root.setBackgroundColor(item.color)
+            tvItemTitle.setTextColor(ContextCompat.getColor(binding.root.context, item.textColor))
+            tvItemDescription.setTextColor(ContextCompat.getColor(binding.root.context, item.textColor))
+            tvDate.setTextColor(ContextCompat.getColor(binding.root.context, item.textColor))
+            tvTime.setTextColor(ContextCompat.getColor(binding.root.context, item.textColor))
+            root.setBackgroundColor(ContextCompat.getColor(binding.root.context, item.selectedColor))
         }
     }
 

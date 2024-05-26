@@ -36,13 +36,6 @@ class NoteFragment : Fragment(), OnClickItem {
         initialize()
         setupListeners()
         getData()
-
-        arguments?.let {
-            val selectedColor = it.getInt("selectedColor", -1)
-            if (selectedColor != -1){
-                binding.rvNote.setBackgroundColor(selectedColor)
-            }
-        }
     }
 
     private fun initialize() {
@@ -56,11 +49,12 @@ class NoteFragment : Fragment(), OnClickItem {
         btnPlusNote.setOnClickListener {
             findNavController().navigate(R.id.action_noteFragment_to_detailNoteFragment)
         }
-        btnChangeLayout.setOnClickListener{
+
+        btnChangeLayout.setOnClickListener {
             isGridLayout = !isGridLayout
-            val layoutManager = if (isGridLayout){
+            val layoutManager = if (isGridLayout) {
                 GridLayoutManager(requireContext(), 2)
-            }else{
+            } else {
                 LinearLayoutManager(requireContext())
             }
             binding.rvNote.layoutManager = layoutManager
@@ -75,12 +69,12 @@ class NoteFragment : Fragment(), OnClickItem {
 
     override fun onLongClick(noteModel: NoteModel) {
         val builder = AlertDialog.Builder(requireContext())
-        with(builder){
+        with(builder) {
             setTitle("Вы точно хотите удалить ?")
-            setPositiveButton("Да"){dialog, which ->
+            setPositiveButton("Да") { _, _ ->
                 App().getInstance()?.noteDao()?.deleteNote(noteModel)
             }
-            setNegativeButton("Нет"){dialog, which ->
+            setNegativeButton("Нет") { dialog, _ ->
                 dialog.cancel()
             }
             show()
