@@ -14,4 +14,8 @@ class PreferenceHelper {
     var isOnBoardShow: Boolean
         get() = sharedPreferences.getBoolean("board", false)
         set(value) = sharedPreferences.edit().putBoolean("board", value).apply()
+
+    var isSignUpShow: Boolean
+        get() = sharedPreferences.getBoolean("sign_up", false)
+        set(value) = sharedPreferences.edit().putBoolean("sign_up", value).apply()
 }

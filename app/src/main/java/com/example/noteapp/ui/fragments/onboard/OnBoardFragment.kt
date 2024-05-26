@@ -60,8 +60,8 @@ class OnBoardFragment : Fragment() {
         }
 
         binding.tvStart.setOnClickListener {
-            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
             preferenceHelper.isOnBoardShow = true
+            findNavController().navigate(R.id.action_onBoardFragment_to_signUpFragment)
         }
     }
 }
