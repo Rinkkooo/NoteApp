@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.drawerlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,4 +74,7 @@ dependencies {
     //auth
     implementation("com.google.android.gms:play-services-auth:21.1.1")
     implementation("com.google.firebase:firebase-auth:21.0.1")
+
+    //Firestore
+    implementation("com.google.firebase:firebase-firestore")
 }

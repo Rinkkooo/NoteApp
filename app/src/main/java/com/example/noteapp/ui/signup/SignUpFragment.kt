@@ -27,7 +27,7 @@ import com.google.firebase.auth.auth
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
-private lateinit var preferenceHelper: PreferenceHelper
+    private lateinit var preferenceHelper: PreferenceHelper
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private val signInLauncher =
@@ -37,10 +37,8 @@ private lateinit var preferenceHelper: PreferenceHelper
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                 try {
                     val account = task.getResult(ApiException::class.java)
-                    Log.d("SignUpFragment", "Google sign in success: ${account?.idToken}")
                     firebaseAuthWithGoogle(account?.idToken)
                 } catch (e: ApiException) {
-                    Log.e("SignUpFragment", "Google sign in failed", e)
                     updateUI(null)
                 }
             }
@@ -81,25 +79,21 @@ private lateinit var preferenceHelper: PreferenceHelper
     private fun firebaseAuthWithGoogle(idToken: String?) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
-            .addOnCompleteListener(requireActivity()){task ->
-                if (task.isSuccessful){
-                    Log.d("SignUpFragment", "Firebase auth success")
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
                     val user = auth.currentUser
                     updateUI(user)
-                }else {
-                    Log.e("SignUpFragment", "Firebase auth failed", task.exception)
+                } else {
                     updateUI(null)
                 }
             }
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        if (user != null){
-            Log.d("SignUpFragment", "User is signed in: ${user.uid}")
+        if (user != null) {
             preferenceHelper.isSignUpShow = true
             findNavController().navigate(R.id.action_signUpFragment_to_noteFragment)
-        }else{
-            Log.e("SignUpFragment", "User is null or authentication failed")
+        } else {
             Toast.makeText(requireContext(), "Аутентификация не удалась", Toast.LENGTH_SHORT).show()
         }
     }
