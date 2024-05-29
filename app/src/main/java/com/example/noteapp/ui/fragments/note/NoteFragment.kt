@@ -2,9 +2,14 @@ package com.example.noteapp.ui.fragments.note
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,18 +21,23 @@ import com.example.noteapp.databinding.FragmentNoteBinding
 import com.example.noteapp.interfaces.OnClickItem
 
 import com.example.noteapp.ui.adapter.NoteAdapter
+import com.google.android.material.navigation.NavigationView
 
 class NoteFragment : Fragment(), OnClickItem {
 
     private lateinit var binding: FragmentNoteBinding
     private val noteAdapter = NoteAdapter(this, this)
     private var isGridLayout = false
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNoteBinding.inflate(layoutInflater)
+        drawerLayout = binding.drawerLayout
+        navigationView = binding.navView
         return binding.root
     }
 
@@ -58,6 +68,29 @@ class NoteFragment : Fragment(), OnClickItem {
                 LinearLayoutManager(requireContext())
             }
             binding.rvNote.layoutManager = layoutManager
+        }
+
+        menuButton.setOnClickListener {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
+        }
+
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            clickMenuItem(menuItem)
+            true
+        }
+    }
+
+    private fun clickMenuItem(menuItem: MenuItem) {
+        menuItem.isChecked = true
+        drawerLayout.closeDrawers()
+
+        when (menuItem.itemId) {
+            R.id.noteFragment -> findNavController().navigate(R.id.noteFragment)
+            R.id.chatFragment -> findNavController().navigate(R.id.chatFragment)
         }
     }
 
